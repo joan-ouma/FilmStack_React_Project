@@ -107,3 +107,20 @@ body {
     right: 10px;
 }
 
+.like-btn {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    font-size: 1.5rem;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.film-info {
+    padding: 1rem;
+}
+
+.film-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
