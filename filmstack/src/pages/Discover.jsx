@@ -41,7 +41,7 @@ function Discover() {
                 />
                 <button type="submit">Search</button>
             </form>
-            <div className="movies-grid">
+            <div className="films-grid">
                 {films.map(film => (
                     <FilmCard key={film.id} film={film} />
                 ))}
