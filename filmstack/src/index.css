@@ -262,3 +262,62 @@ body {
     line-height: 1.6;
     color: #f1f5f9;
 }
+
+/* Genre Pills & Badges */
+.genre-pills {
+    display: flex;
+    gap: 0.8rem;
+    overflow-x: auto;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: #38bdf8 #1e293b;
+}
+
+.genre-pills::-webkit-scrollbar {
+    height: 6px;
+}
+
+.genre-pills::-webkit-scrollbar-thumb {
+    background-color: #38bdf8;
+    border-radius: 10px;
+}
+
+.genre-pill {
+    padding: 0.5rem 1.2rem;
+    background: #1e293b;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 20px;
+    color: #cbd5e1;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.genre-pill:hover {
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+}
+
+.genre-pill.active {
+    background: #38bdf8;
+    color: #0f172a;
+    border-color: #38bdf8;
+}
+
+.film-badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.genre-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(56, 189, 248, 0.2);
+    color: #38bdf8;
+    border-radius: 12px;
+    font-weight: bold;
+}
