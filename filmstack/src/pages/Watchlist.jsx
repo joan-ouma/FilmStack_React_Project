@@ -7,7 +7,7 @@ function Watchlist() {
         return (
             <div className="watchlist-container">
                 <h2>Your Curated Collection</h2>
-                <div className="movies-grid">
+                <div className="films-grid">
                     {watchlist.map((movie) => (
                         <p key={movie.id}>{movie.title}</p>
                     ))}
