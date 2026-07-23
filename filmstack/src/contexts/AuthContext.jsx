@@ -8,6 +8,15 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
 
+    useEffect(() => {
+        const storedToken = localStorage.getItem("filmstack_token");
+        const storedUser = localStorage.getItem("filmstack_user");
+        if (storedToken && storedUser) {
+            setToken(storedToken);
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
     const login = (userData, authToken) => {
         setUser(userData);
         setToken(authToken);
