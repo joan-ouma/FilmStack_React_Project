@@ -46,3 +46,31 @@ body {
     color: #38bdf8;
 }
 
+/* Search Bar */
+.search-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1rem;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: #1e293b;
+    color: white;
+}
+
+.search-form button {
+    padding: 0.8rem 1.5rem;
+    background: #38bdf8;
+    border: none;
+    border-radius: 8px;
+    color: #0f172a;
+    font-weight: bold;
+    cursor: pointer;
+}
+
