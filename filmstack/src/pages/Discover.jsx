@@ -1,26 +1,33 @@
 import { useEffect, useState } from "react";
-import { fetchPopularFilms, searchFilms } from "../services/api";
+import { fetchPopularFilms, searchFilms, fetchGenres, fetchFilmsByGenre } from "../services/api";
 import FilmCard from "../components/FilmCard";
 
 function Discover() {
     const [films, setFilms] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [genres, setGenres] = useState([]);
+    const [activeGenre, setActiveGenre] = useState(null);
 
     useEffect(() => {
-        const loadPopular = async () => {
+        const loadData = async () => {
             try {
-                const popular = await fetchPopularFilms();
+                const [popular, genreList] = await Promise.all([
+                    fetchPopularFilms(),
+                    fetchGenres()
+                ]);
                 setFilms(popular || []);
+                setGenres(genreList || []);
             } catch (error) {
                 console.error(error);
             }
         };
-        loadPopular();
+        loadData();
     }, []);
 
     const handleSearch = async (e) => {
         e.preventDefault();
         if (!searchQuery.trim()) return;
+        setActiveGenre(null);
         try {
             const results = await searchFilms(searchQuery);
             setFilms(results || []);
@@ -29,9 +36,26 @@ function Discover() {
         }
     };
 
+    const handleGenreClick = async (genreId) => {
+        setActiveGenre(genreId);
+        setSearchQuery("");
+        try {
+            if (genreId === null) {
+                const popular = await fetchPopularFilms();
+                setFilms(popular || []);
+            } else {
+                const results = await fetchFilmsByGenre(genreId);
+                setFilms(results || []);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div className="discover-container">
             <h2>Discover Movies</h2>
+            
             <form onSubmit={handleSearch} className="search-form">
                 <input 
                     type="text" 
@@ -41,9 +65,28 @@ function Discover() {
                 />
                 <button type="submit">Search</button>
             </form>
+
+            <div className="genre-pills">
+                <button 
+                    className={`genre-pill ${activeGenre === null ? "active" : ""}`}
+                    onClick={() => handleGenreClick(null)}
+                >
+                    All
+                </button>
+                {genres.map(genre => (
+                    <button 
+                        key={genre.id}
+                        className={`genre-pill ${activeGenre === genre.id ? "active" : ""}`}
+                        onClick={() => handleGenreClick(genre.id)}
+                    >
+                        {genre.name}
+                    </button>
+                ))}
+            </div>
+
             <div className="films-grid">
                 {films.map(film => (
-                    <FilmCard key={film.id} film={film} />
+                    <FilmCard key={film.id} film={film} genresMap={genres} />
                 ))}
             </div>
         </div>
