@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
+import watchlistRoutes from "./routes/watchlist.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/watchlist", watchlistRoutes);
 
 app.get("/", (req, res) => {
     res.send("FilmStack API is running...");
