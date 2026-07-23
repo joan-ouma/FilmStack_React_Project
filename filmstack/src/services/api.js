@@ -26,3 +26,15 @@ export const fetchMovieTrailer = async (id) => {
     const trailer = data.results.find(vid => vid.type === "Trailer" && vid.site === "YouTube");
     return trailer ? trailer.key : null;
 };
+
+export const fetchGenres = async () => {
+    const response = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+    const data = await response.json();
+    return data.genres;
+};
+
+export const fetchFilmsByGenre = async (genreId) => {
+    const response = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`);
+    const data = await response.json();
+    return data.results;
+};
